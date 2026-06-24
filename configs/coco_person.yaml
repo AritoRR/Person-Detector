@@ -1,0 +1,7 @@
+path: ../datasets/coco
+train: train_person_split.txt
+val: val_person.txt
+test: test_person.txt
+
+nc: 1
+names: ['person']

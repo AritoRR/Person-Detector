@@ -1,7 +1,0 @@
-path: ../datasets/coco
-train: train2017.txt
-val: val2017.txt
-test: test-dev2017.txt
-
-nc: 1
-names: ['person']
