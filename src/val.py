@@ -2,7 +2,7 @@ import subprocess
 import sys
 import os
 
-from src.script_path import VAL_PATH, WEIGHTS_PATH
+from script_path import VAL_PATH, WEIGHTS_PATH, CONFIG_PATH, jpath, RUNS_PATH
 
 
 def main():
@@ -17,11 +17,11 @@ def main():
     cmd = [
         sys.executable,
         VAL_PATH,
-        '--data', 'configs/coco_person.yaml',
+        '--data', CONFIG_PATH,
         '--weights', WEIGHTS_PATH,
         '--img', '640',
         '--batch', '16',
-        '--project', 'runs/val',
+        '--project', jpath(RUNS_PATH, '/val'),
         '--name', 'exp_person'
     ]
 

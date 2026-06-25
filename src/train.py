@@ -2,7 +2,7 @@ import subprocess
 import sys
 import os
 
-from script_path import TRAIN_PATH, CONFIG_PATH, MODEL_PATH
+from script_path import TRAIN_PATH, CONFIG_PATH, MODEL_PATH, RUNS_PATH, jpath
 
 
 def main():
@@ -35,7 +35,7 @@ def main():
             '--img', '640',
             '--batch', '16',
             '--epochs', '100',
-            '--project', '../runs/train',
+            '--project', jpath(RUNS_PATH, 'train'),
             '--name', 'exp_person',
             '--exist-ok'
         ]
