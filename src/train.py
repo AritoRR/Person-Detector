@@ -1,21 +1,28 @@
 import subprocess
 import sys
 import os
+import argparse
 
-from script_path import TRAIN_PATH, CONFIG_PATH, MODEL_PATH, RUNS_PATH, jpath, WEIGHTS_PATH, HYP_SLOW_PATH
+from script_path import TRAIN_PATH, CONFIG_PATH, MODEL_PATH, RUNS_PATH, jpath, WEIGHTS_PATH, HYP_SLOW_PATH, CONFIGS_PATH
 
 
 def main():
-    resume = False
-    if len(sys.argv) > 1 and sys.argv[1] == '--resume':
-        resume = True
+    parser = argparse.ArgumentParser()
 
+    parser.add_argument('--resume', action='store_true', help='Продолжить обучение с last.pt')
+
+    parser.add_argument('--name', type=str, default='exp_new', help='Имя эксперимента')
+    parser.add_argument('--weights', type=str, default=WEIGHTS_PATH, help='Путь к весам')
+    parser.add_argument('--hyp', type=str, default=HYP_SLOW_PATH, help='Путь к файлу гиперпараметров')
+    parser.add_argument('--data', type=str, default='coco_person.yaml', help='Имя файла конфига')
+
+    args = parser.parse_args()
     if not os.path.exists(TRAIN_PATH):
         print(f"ERROR: {TRAIN_PATH} dont exist.")
         sys.exit(1)
 
-    if resume:
-        last_pt = '../runs/train/exp_person/weights/last.pt'
+    if args.resume:
+        last_pt = f'../runs/train/{args.name}/weights/last.pt'
         if not os.path.exists(last_pt):
             print(f"ERROR: {last_pt} not found. Can't resume.")
             sys.exit(1)
@@ -29,15 +36,15 @@ def main():
         cmd = [
             sys.executable,
             TRAIN_PATH,
-            '--data', CONFIG_PATH,
+            '--data', jpath(CONFIGS_PATH, args.data),
             '--cfg', MODEL_PATH,
-            '--weights', WEIGHTS_PATH,
-            '--hyp', HYP_SLOW_PATH,
+            '--weights', args.weights,
+            '--hyp', args.hyp,
             '--img', '640',
             '--batch', '16',
             '--epochs', '25',
             '--project', jpath(RUNS_PATH, 'train'),
-            '--name', 'exp_hslow_coco',
+            '--name', args.name,
             '--exist-ok'
         ]
 
