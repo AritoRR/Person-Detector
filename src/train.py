@@ -2,7 +2,7 @@ import subprocess
 import sys
 import os
 
-from script_path import TRAIN_PATH, CONFIG_PATH, MODEL_PATH, RUNS_PATH, jpath
+from script_path import TRAIN_PATH, CONFIG_PATH, MODEL_PATH, RUNS_PATH, jpath, WEIGHTS_PATH, HYP_SLOW_PATH
 
 
 def main():
@@ -31,12 +31,13 @@ def main():
             TRAIN_PATH,
             '--data', CONFIG_PATH,
             '--cfg', MODEL_PATH,
-            '--weights', '',
+            '--weights', WEIGHTS_PATH,
+            '--hyp', HYP_SLOW_PATH,
             '--img', '640',
             '--batch', '16',
-            '--epochs', '100',
+            '--epochs', '25',
             '--project', jpath(RUNS_PATH, 'train'),
-            '--name', 'exp_person',
+            '--name', 'exp_hslow_coco',
             '--exist-ok'
         ]
 
