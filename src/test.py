@@ -2,10 +2,14 @@ import subprocess
 import sys
 import os
 
-from script_path import VAL_PATH, WEIGHTS_PATH, CONFIG_PATH, jpath, RUNS_PATH
+from script_path import VAL_PATH, WEIGHTS_PATH, jpath, RUNS_PATH, CONFIGS_PATH
 
 
 def main():
+    data = 'coco'
+    if len(sys.argv) > 1:
+        data = sys.argv[1]
+
     if not os.path.exists(VAL_PATH):
         print(f"ERROR: {VAL_PATH} dont exist.")
         sys.exit(1)
@@ -17,7 +21,7 @@ def main():
     cmd = [
         sys.executable,
         VAL_PATH,
-        '--data', CONFIG_PATH,
+        '--data', jpath(CONFIGS_PATH, data),
         '--weights', WEIGHTS_PATH,
         '--img', '640',
         '--batch', '16',
