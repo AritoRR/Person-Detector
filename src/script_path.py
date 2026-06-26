@@ -16,4 +16,6 @@ ANNOTATIONS_OUTPUT = "../datasets/coco/"
 LABELS_PATH = "../datasets/coco/labels/"
 LABELS_OUTPUT = "../datasets/coco/labels_person/"
 RUNS_PATH = '../runs'
+MILITARY_PATH = "../datasets/military"
+CONFIGS_PATH = "../configs"
 HYP_SLOW_PATH = '../configs/hyps/hyp.scratch-low.yaml'
