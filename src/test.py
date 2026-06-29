@@ -11,7 +11,7 @@ def main():
 
     parser.add_argument('--name', type=str, default='exp_person', help='Имя эксперимента')
     parser.add_argument('--weights', type=str, default=WEIGHTS_PATH, help='Путь к весам')
-    parser.add_argument('--data', type=str, default='coco', help='Имя папки с датасетом')
+    parser.add_argument('--data', type=str, default='coco_person.yaml', help='Имя папки с датасетом')
 
     args = parser.parse_args()
 
