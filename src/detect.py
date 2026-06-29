@@ -1,16 +1,19 @@
 import os
 import subprocess
 import sys
+import argparse
 
 from script_path import WEIGHTS_PATH, RUNS_PATH, DETECT_PATH
 from src.script_path import jpath
 
 
 def main():
-    if len(sys.argv) < 3:
-        print("ERROR: enter --image /path/to/image.jpg")
-        sys.exit(1)
+    parser = argparse.ArgumentParser()
 
+    parser.add_argument('--name', type=str, default='exp_person', help='Имя эксперимента')
+    parser.add_argument('--image', type=str, default='exp_person', help='Путь к картинке')
+
+    args = parser.parse_args()
     if not os.path.exists(DETECT_PATH):
         print(f"ERROR: {DETECT_PATH} dont exist.")
         sys.exit(1)
@@ -19,11 +22,11 @@ def main():
         sys.executable,
         DETECT_PATH,
         '--weights', WEIGHTS_PATH,
-        '--source', sys.argv[2],
+        '--source', args.image,
         '--img', '640',
         '--conf', '0.25',
         '--project', jpath(RUNS_PATH, 'detection'),
-        '--name', 'exp_person',
+        '--name', args.name,
         '--exist-ok'
     ]
 
