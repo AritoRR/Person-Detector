@@ -13,7 +13,7 @@ def main():
 
     parser.add_argument('--name', type=str, default='exp_new', help='Имя эксперимента')
     parser.add_argument('--weights', type=str, default=WEIGHTS_PATH, help='Путь к весам')
-    parser.add_argument('--hyp', type=str, default=HYP_SLOW_PATH, help='Путь к файлу гиперпараметров')
+    parser.add_argument('--hyp', type=str, default='hyp.scratch-low.yaml', help='Путь к файлу гиперпараметров')
     parser.add_argument('--data', type=str, default='coco_person.yaml', help='Имя файла конфига')
     parser.add_argument('--epochs', type=str, default='100', help='Число эпох')
 
@@ -40,7 +40,7 @@ def main():
             '--data', jpath(CONFIGS_PATH, args.data),
             '--cfg', MODEL_PATH,
             '--weights', args.weights,
-            '--hyp', args.hyp,
+            '--hyp', jpath(CONFIGS_PATH, 'hyps', args.hyp),
             '--img', '640',
             '--batch', '16',
             '--epochs', args.epochs,
